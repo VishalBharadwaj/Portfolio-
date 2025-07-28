@@ -28,13 +28,16 @@
 .about-content {
     display: grid;
     grid-template-columns: 1fr;
-    gap: 4rem;
+    gap: 3rem; /* Spacing for mobile view */
     align-items: center;
 }
 
+/* On larger screens, switch to a two-column layout */
 @media (min-width: 992px) {
     .about-content {
-        grid-template-columns: 1fr 1.5fr;
+        /* Text on the left, image on the right */
+        grid-template-columns: 1.5fr 1fr;
+        gap: 5rem; /* Increased gap for more breathing room */
     }
 }
 
@@ -42,19 +45,20 @@
 .about-image {
     position: relative;
     width: 100%;
-    max-width: 350px;
+    max-width: 380px; /* Slightly increased size */
     margin: 0 auto;
 }
 
 .profile-picture {
     width: 100%;
-    border-radius: 1rem;
+    border-radius: 1.25rem; /* Softer border radius */
     box-shadow: 0 10px 30px rgba(0,0,0,0.1);
     transition: transform 0.4s ease, box-shadow 0.4s ease;
+    border: 3px solid var(--border-color); /* Added a subtle border for definition */
 }
 
 .about-image:hover .profile-picture {
-    transform: scale(1.05);
+    transform: scale(1.05) translateY(-5px);
     box-shadow: 0 15px 40px rgba(0,0,0,0.15);
 }
 
@@ -63,7 +67,12 @@
     font-size: 1.05rem;
     line-height: 1.8;
     color: var(--text-secondary);
-    margin-bottom: 2rem;
+    margin-bottom: 1.5rem; /* Adjusted paragraph spacing */
+}
+
+/* Add more space between the last paragraph and the skills section */
+.about-text p:last-of-type {
+    margin-bottom: 2.5rem;
 }
 
 .skills-header {
@@ -71,6 +80,10 @@
     font-weight: 700;
     color: var(--text-color);
     margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    /* Added an underline to create a visual break */
+    border-bottom: 2px solid var(--primary-color); 
+    display: inline-block; /* Ensures underline only spans the text width */
 }
 
 .skills-grid {
@@ -114,8 +127,8 @@
 }
 
 /* The 'active' class will be added by your IntersectionObserver in App.js */
-.about-section.active .about-image { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
-.about-section.active .about-text p { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.about-section.active .about-image { opacity: 1; transform: translateY(0); transition-delay: 0.4s; }
+.about-section.active .about-text p { opacity: 1; transform: translateY(0); transition-delay: 0.2s; }
 .about-section.active .skills-header { opacity: 1; transform: translateY(0); transition-delay: 0.6s; }
 
 /* Staggered animation for skills */

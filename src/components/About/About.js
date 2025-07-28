@@ -1,5 +1,6 @@
 import React from 'react';
 import './About.css';
+import profileImage from '../../assets/images/Vizzy.png'; // 1. Import your image
 
 // --- SVG Icons for Skills ---
 const ReactIcon = () => <svg role="img" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><title>React</title><path d="M12.001 2.002c-5.522 0-10 4.478-10 10s4.478 10 10 10 10-4.478 10-10-4.478-10-10-10zm0 18.002c-4.411 0-8-3.589-8-8s3.589-8 8-8 8 3.589 8 8-3.589 8-8 8zm-3.488-2.652c-.312.312-.312.818 0 1.13.312.312.818.312 1.13 0l2.358-2.358 2.358 2.358c.312.312.818.312 1.13 0 .312-.312.312-.818 0-1.13l-2.358-2.358 2.358-2.358c.312-.312.312-.818 0-1.13-.312-.312-.818-.312-1.13 0l-2.358 2.358-2.358-2.358c-.312-.312-.818-.312-1.13 0-.312.312-.312.818 0 1.13l2.358 2.358-2.358 2.358z" fill="currentColor"/></svg>;
@@ -27,14 +28,6 @@ const About = ({ isActive }) => {
                     <p className="section-subtitle">Developer, Leader, and Strategic Thinker</p>
                 </div>
                 <div className="about-content">
-                    <div className="about-image">
-                        <img 
-                            src="https://placehold.co/500x600/1F2937/FFFFFF?text=Vishal" 
-                            alt="Vishal Bharadwaj" 
-                            className="profile-picture"
-                            onError={(e) => { e.target.onerror = null; e.target.src='https://placehold.co/500x600'; }}
-                        />
-                    </div>
                     <div className="about-text">
                         <p>
                             My journey into technology began long before my first line of professional code. From competing in code battles as a teenager to serving as my school's IT Head, I've always been driven to solve real-world problems. During the first wave of COVID-19, this led me to develop a facial recognition attendance app to help teachers adapt to new challenges.
@@ -51,6 +44,13 @@ const About = ({ isActive }) => {
                                 </div>
                             ))}
                         </div>
+                    </div>
+                    <div className="about-image">
+                        <img 
+                            src={profileImage} 
+                            alt="Vishal Bharadwaj" 
+                            className="profile-picture"
+                        />
                     </div>
                 </div>
             </div>
