@@ -130,7 +130,7 @@
 
 .scroll-indicator {
   position: absolute;
-  bottom: 40px;
+  bottom: 20px;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
@@ -138,12 +138,13 @@
   align-items: center;
   animation: fadeIn 1s ease-out 1s forwards, bounce 2s infinite;
   opacity: 0;
+  cursor: pointer;
 }
 
 .scroll-text {
   font-size: 0.8rem;
   color: var(--text-light);
-  margin-bottom: 8px;
+  margin-bottom: 4px;
   letter-spacing: 1px;
   text-transform: uppercase;
 }
