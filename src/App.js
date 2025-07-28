@@ -18,6 +18,7 @@ function App() {
   const [isLoading, setIsLoading] = useState(true);
   const [theme, setTheme] = useState('light');
   
+  // --- LOGIC FROM YOUR NEW CODE ---
   const sectionRefs = {
     hero: useRef(null),
     about: useRef(null),
@@ -25,6 +26,9 @@ function App() {
     projects: useRef(null),
     contact: useRef(null)
   };
+
+  // --- LOGIC FROM MY SUGGESTION (INTEGRATED) ---
+  const [scrollProgress, setScrollProgress] = useState(0);
 
   // Handle loading screen
   useEffect(() => {
@@ -46,8 +50,18 @@ function App() {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
 
-  // Intersection Observer for sections
+  // Combined useEffect for all scroll-related activities
   useEffect(() => {
+    // --- SCROLL PROGRESS LOGIC ---
+    const handleScrollProgress = () => {
+      const totalScroll = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+      if (totalScroll > 0) {
+        const progress = (window.scrollY / totalScroll) * 100;
+        setScrollProgress(progress);
+      }
+    };
+    
+    // --- INTERSECTION OBSERVER LOGIC ---
     const observerOptions = {
       root: null,
       rootMargin: '0px',
@@ -64,12 +78,14 @@ function App() {
 
     const observer = new IntersectionObserver(observerCallback, observerOptions);
 
-    // Observe all section refs
     Object.values(sectionRefs).forEach(ref => {
       if (ref.current) {
         observer.observe(ref.current);
       }
     });
+    
+    // Add scroll listener for the FAB
+    window.addEventListener('scroll', handleScrollProgress, { passive: true });
 
     return () => {
       Object.values(sectionRefs).forEach(ref => {
@@ -77,8 +93,10 @@ function App() {
           observer.unobserve(ref.current);
         }
       });
+      // Remove scroll listener
+      window.removeEventListener('scroll', handleScrollProgress);
     };
-  }, [sectionRefs]);
+  }, [sectionRefs]); // Dependency array remains the same
 
   // Scroll to section function
   const scrollToSection = (sectionId) => {
@@ -103,29 +121,20 @@ function App() {
       />
       
       <main>
-        <div id="hero" ref={sectionRefs.hero} className={activeSection === 'hero' ? 'active' : ''}>
-          <Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} />
-        </div>
-        
-        <section id="about" ref={sectionRefs.about} className={activeSection === 'about' ? 'active' : ''}>
-          <About isActive={activeSection === 'about'} />
-        </section>
-        
-        <section id="services" ref={sectionRefs.services} className={activeSection === 'services' ? 'active' : ''}>
-          <Services isActive={activeSection === 'services'} />
-        </section>
-        
-        <section id="projects" ref={sectionRefs.projects} className={activeSection === 'projects' ? 'active' : ''}>
-          <Projects isActive={activeSection === 'projects'} />
-        </section>
-        
-        <section id="contact" ref={sectionRefs.contact} className={activeSection === 'contact' ? 'active' : ''}>
-          <Contact isActive={activeSection === 'contact'} />
-        </section>
+        <div id="hero" ref={sectionRefs.hero}><Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} /></div>
+        <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
+        <section id="services" ref={sectionRefs.services}><Services isActive={activeSection === 'services'} /></section>
+        <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+        <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
       </main>
       
       <Footer />
-      <FloatingActionButton scrollToSection={scrollToSection} />
+      
+      {/* Pass the scrollProgress state to the FAB */}
+      <FloatingActionButton 
+        scrollToSection={scrollToSection} 
+        scrollProgress={scrollProgress} 
+      />
     </div>
   );
 }

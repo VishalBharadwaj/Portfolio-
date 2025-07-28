@@ -3,105 +3,110 @@ import './Hero.css';
 
 const Hero = ({ scrollToSection, isActive }) => {
   const [typedText, setTypedText] = useState('');
-  const [currentTextIndex, setCurrentTextIndex] = useState(0);
-  const [isTyping, setIsTyping] = useState(true);
+  // Updated text based on your LinkedIn profile
+  const heroTexts = useRef(["Cloud Practitioner", "Cyber Security Enthusiast", "Speaker", "Master of Ceremonies (MC)" ]);
   const heroRef = useRef(null);
-  
-  const heroTexts = [
-    "Full Stack Developer",
-    "React Specialist", 
-    "UI/UX Enthusiast"
-  ];
 
-  // Typing animation
+  // A more robust typing animation hook
   useEffect(() => {
     if (!isActive) return;
 
-    const currentText = heroTexts[currentTextIndex];
-    let currentIndex = 0;
-    let typingInterval;
-    
-    if (isTyping) {
-      // Typing effect
-      typingInterval = setInterval(() => {
-        if (currentIndex <= currentText.length) {
-          setTypedText(currentText.substring(0, currentIndex));
-          currentIndex++;
-        } else {
-          clearInterval(typingInterval);
-          setTimeout(() => setIsTyping(false), 1500);
-        }
-      }, 100);
-    } else {
-      // Erasing effect
-      currentIndex = currentText.length;
-      typingInterval = setInterval(() => {
-        if (currentIndex >= 0) {
-          setTypedText(currentText.substring(0, currentIndex));
-          currentIndex--;
-        } else {
-          clearInterval(typingInterval);
-          setCurrentTextIndex((prevIndex) => (prevIndex + 1) % heroTexts.length);
-          setIsTyping(true);
-        }
-      }, 50);
-    }
+    let textIndex = 0;
+    let charIndex = 0;
+    let isDeleting = false;
+    let timeoutId;
+
+    const type = () => {
+      const currentText = heroTexts.current[textIndex];
+      
+      if (isDeleting) {
+        // Erasing
+        setTypedText(currentText.substring(0, charIndex - 1));
+        charIndex--;
+      } else {
+        // Typing
+        setTypedText(currentText.substring(0, charIndex + 1));
+        charIndex++;
+      }
+
+      // State transitions
+      if (!isDeleting && charIndex === currentText.length) {
+        isDeleting = true;
+        timeoutId = setTimeout(type, 2000); // Pause at end
+      } else if (isDeleting && charIndex === 0) {
+        isDeleting = false;
+        textIndex = (textIndex + 1) % heroTexts.current.length;
+        timeoutId = setTimeout(type, 500); // Pause before typing new text
+      } else {
+        timeoutId = setTimeout(type, isDeleting ? 50 : 100);
+      }
+    };
+
+    type(); // Start the animation
 
     return () => {
-      clearInterval(typingInterval);
+      clearTimeout(timeoutId); // Cleanup on component unmount
     };
-  }, [isActive, currentTextIndex, isTyping, heroTexts]);
+  }, [isActive]);
 
   const handleExploreClick = () => {
     scrollToSection('about');
   };
 
   return (
-    <div className="hero-container" ref={heroRef}>
-      <div className="container">
-        <div className="hero-content">
-          <div className="hero-text">
-            <h1 className="hero-title">Hi, I'm <span className="highlight">Vishal</span></h1>
-            <h2 className="hero-subtitle">
-              <span className="static-text">I'm a </span>
-              <span className="typed-text">{typedText}</span>
-              <span className="cursor">|</span>
-            </h2>
-            <p className="hero-description">
-              Passionate about creating beautiful, functional, and user-centered digital experiences.
-              Specialized in building modern web applications with React and Node.js.
-            </p>
-            <div className="hero-buttons">
-              <button className="btn btn-primary" onClick={handleExploreClick}>
-                Explore My Work
-              </button>
-              <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
-                Get In Touch
-              </button>
-            </div>
+    <div className={`hero-container ${isActive ? 'active' : ''}`} ref={heroRef}>
+      <div className="container hero-grid">
+        <div className="hero-text">
+          <h1 className="hero-title">Hi, I'm <span className="highlight">Vishal</span></h1>
+          <h2 className="hero-subtitle">
+            <span className="static-text">I'm a </span>
+            <span className="typed-text">{typedText}</span>
+            <span className="cursor">|</span>
+          </h2>
+          <p className="hero-description">
+            I build and design web applications, specializing in the MERN stack. I'm passionate about creating clean, efficient code and intuitive user interfaces.
+          </p>
+          <div className="hero-buttons">
+            <button className="btn btn-primary" onClick={handleExploreClick}>
+              Explore My Work
+            </button>
+            <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
+              Get In Touch
+            </button>
           </div>
-          <div className="hero-card">
-            <div className="code-card">
-              <div className="code-line"><span className="code-comment">// developer.js</span></div>
-              <div className="code-line"><span className="code-keyword">const</span> developer = {'{'}</div>
-              <div className="code-line">  <span className="code-property">name</span>: <span className="code-string">"Vishal"</span>,</div>
-              <div className="code-line">  <span className="code-property">title</span>: <span className="code-string">"Full Stack Developer"</span>,</div>
-              <div className="code-line">  <span className="code-property">skills</span>: [</div>
-              <div className="code-line">    <span className="code-string">"React"</span>, </div>
-              <div className="code-line">    <span className="code-string">"Node.js"</span>, </div>
-              <div className="code-line">    <span className="code-string">"JavaScript"</span>,</div>
-              <div className="code-line">    <span className="code-string">"UI/UX Design"</span></div>
-              <div className="code-line">  ],</div>
-              <div className="code-line">  <span className="code-property">location</span>: <span className="code-string">"Remote"</span>,</div>
-              <div className="code-line">  <span className="code-property">available</span>: <span className="code-keyword">true</span></div>
-              <div className="code-line">{'};'}</div>
+        </div>
+        <div className="hero-card">
+          <div className="code-card">
+            <div className="code-header">
+              <div className="code-dot red"></div>
+              <div className="code-dot yellow"></div>
+              <div className="code-dot green"></div>
             </div>
+            <pre className="code-body">
+              <code>
+                <span className="code-comment">// developer.js</span><br/>
+                <span className="code-keyword">const</span> developer = {'{'}<br/>
+                {'  '}<span className="code-property">name</span>: <span className="code-string">"Vishal Bharadwaj"</span>,<br/>
+                {'  '}<span className="code-property">title</span>: <span className="code-string">"Aspiring Full Stack Developer"</span>,<br/>
+                {'  '}<span className="code-property">skills</span>: [<br/>
+                {'    '}<span className="code-string">"React"</span>,<br/>
+                {'    '}<span className="code-string">"Node.js"</span>,<br/>
+                {'    '}<span className="code-string">"JavaScript"</span>,<br/>
+                {'    '}<span className="code-string">"HTML/CSS"</span><br/>
+                {'  '}],<br/>
+                {'  '}<span className="code-property">location</span>: <span className="code-string">"Bengaluru, India"</span>,<br/>
+                {'  '}<span className="code-property">availableForWork</span>: <span className="code-keyword">true</span><br/>
+                {'};'}
+              </code>
+            </pre>
           </div>
         </div>
       </div>
-      <div className="scroll-indicator">
+      <div className="scroll-indicator" onClick={handleExploreClick}>
         <span className="scroll-text">Scroll Down</span>
-        <span className="scroll-icon" onClick={handleExploreClick}>↓</span>
+        <div className="scroll-icon">
+            <div className="scroll-icon-wheel"></div>
+        </div>
       </div>
     </div>
   );

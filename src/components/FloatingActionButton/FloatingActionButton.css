@@ -1,38 +1,75 @@
+/* --- FloatingActionButton.css --- */
+/* Note: The color variables (e.g., --primary-dark) should be defined in a global CSS file like index.css */
+
 .floating-action-btn {
-  position: fixed;
-  bottom: 30px;
-  right: 30px;
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  background: var(--primary-color);
-  color: white;
-  border: none;
-  font-size: 1.5rem;
-  cursor: pointer;
-  box-shadow: 0 4px 20px rgba(37, 99, 235, 0.4);
-  transform: translateY(100px);
-  opacity: 0;
-  transition: all var(--transition-medium);
-  z-index: 1000;
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: var(--primary-dark, #818CF8); /* Fallback color */
+    color: var(--primary-text-dark, #111827); /* Fallback color */
+    border: none;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    z-index: 999;
+    
+    /* Animation for appearing/disappearing */
+    transform: translateY(100px);
+    opacity: 0;
+    transition: transform 0.4s ease, opacity 0.4s ease, background-color 0.3s ease;
 }
 
 .floating-action-btn.visible {
-  transform: translateY(0);
-  opacity: 1;
+    transform: translateY(0);
+    opacity: 1;
 }
 
 .floating-action-btn:hover {
-  transform: translateY(-5px) scale(1.1);
-  box-shadow: 0 8px 30px rgba(37, 99, 235, 0.6);
+    transform: scale(1.05);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.25);
 }
 
-@media (max-width: 768px) {
-  .floating-action-btn {
-    width: 50px;
-    height: 50px;
-    bottom: 20px;
-    right: 20px;
-    font-size: 1.2rem;
-  }
+.floating-action-btn:active {
+    transform: scale(0.98);
+}
+
+.fab-icon-wrapper {
+    position: relative;
+    width: 24px;
+    height: 24px;
+}
+
+.fab-icon {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    /* Animation for the icon cross-fade */
+    transition: opacity 0.3s ease, transform 0.3s ease;
+}
+
+/* Styles for the two icon states */
+.fab-icon.icon-top {
+    opacity: 1;
+    transform: scale(1);
+}
+.fab-icon.icon-contact {
+    opacity: 0;
+    transform: scale(0.5);
+}
+
+/* When the button has the 'show-contact' class, flip the icon visibilities */
+.floating-action-btn.show-contact .fab-icon.icon-top {
+    opacity: 0;
+    transform: scale(0.5);
+}
+.floating-action-btn.show-contact .fab-icon.icon-contact {
+    opacity: 1;
+    transform: scale(1);
 }

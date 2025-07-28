@@ -1,227 +1,233 @@
+/* --- Hero.css --- */
+/* Assumes you have theming variables in a global CSS file */
+
 .hero-container {
   min-height: 100vh;
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 6rem 0 2rem 0;
   position: relative;
   overflow: hidden;
-  padding: 120px 0 40px;
-  background: linear-gradient(135deg, var(--background-light) 0%, rgba(var(--primary-color-rgb), 0.05) 100%);
 }
 
-.hero-content {
-  display: flex;
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1fr;
   align-items: center;
-  justify-content: space-between;
-  gap: 40px;
-  height: 100%;
+  gap: 3rem;
+  width: 100%;
 }
 
-.hero-text {
-  flex: 1;
-  max-width: 600px;
-  animation: slideInLeft 0.8s ease-out;
+@media (min-width: 992px) {
+  .hero-grid {
+    grid-template-columns: 1.2fr 0.8fr;
+  }
 }
 
+/* --- Entrance Animations --- */
+.hero-text > * {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+}
+
+.hero-container.active .hero-text > * {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Staggered animation delays */
+.hero-container.active .hero-title { transition-delay: 0.2s; }
+.hero-container.active .hero-subtitle { transition-delay: 0.4s; }
+.hero-container.active .hero-description { transition-delay: 0.6s; }
+.hero-container.active .hero-buttons { transition-delay: 0.8s; }
+
+/* --- Text Styling --- */
 .hero-title {
-  font-size: 3.5rem;
+  font-size: clamp(2.5rem, 6vw, 4rem);
   font-weight: 800;
-  margin-bottom: 16px;
-  line-height: 1.2;
-  color: var(--text-dark);
+  color: var(--text-color);
+  margin-bottom: 0.5rem;
 }
 
 .highlight {
   color: var(--primary-color);
-  position: relative;
 }
 
 .hero-subtitle {
-  font-size: 1.8rem;
-  color: var(--text-light);
-  margin-bottom: 24px;
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  font-weight: 600;
-}
-
-.static-text {
-  color: var(--text-dark);
+  font-size: clamp(1.5rem, 4vw, 2.25rem);
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 1.5rem;
+  min-height: 3.5rem; /* Prevents layout shift */
 }
 
 .typed-text {
-  color: var(--secondary-color);
-}
-
-.cursor {
-  animation: blink 1s infinite;
   color: var(--primary-color);
   font-weight: 700;
 }
 
+.cursor {
+  animation: blink 0.7s infinite;
+  color: var(--primary-color);
+}
+
+@keyframes blink {
+  50% { opacity: 0; }
+}
+
 .hero-description {
   font-size: 1.1rem;
-  color: var(--text-light);
-  margin-bottom: 32px;
-  line-height: 1.6;
+  line-height: 1.7;
+  max-width: 600px;
+  margin-bottom: 2rem;
+  color: var(--text-secondary);
 }
 
+/* --- Buttons --- */
 .hero-buttons {
   display: flex;
-  gap: 16px;
-  margin-top: 24px;
+  gap: 1rem;
 }
 
+.btn {
+  padding: 0.8rem 1.8rem;
+  border-radius: 8px;
+  font-weight: 600;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  border: 2px solid transparent;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: var(--primary-text);
+}
+
+.btn-primary:hover {
+  background-color: transparent;
+  border-color: var(--primary-color);
+  color: var(--primary-color);
+}
+
+.btn-secondary {
+  background-color: transparent;
+  border-color: var(--border-color);
+  color: var(--text-color);
+}
+
+.btn-secondary:hover {
+  background-color: var(--border-color);
+}
+
+/* --- Code Card --- */
 .hero-card {
-  flex: 1;
-  max-width: 450px;
-  background: rgba(255, 255, 255, 0.03);
-  backdrop-filter: blur(10px);
-  border-radius: 16px;
-  padding: 24px;
-  border: 1px solid rgba(var(--primary-color-rgb), 0.1);
-  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
-  animation: slideInRight 0.8s ease-out;
-  position: relative;
-  overflow: hidden;
+  perspective: 1500px;
+  opacity: 0;
+  transform: translateX(50px);
+  transition: opacity 0.8s ease-out 0.6s, transform 0.8s ease-out 0.6s;
 }
 
-.hero-card::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(var(--primary-color-rgb), 0.1) 0%, transparent 70%);
-  z-index: -1;
+.hero-container.active .hero-card {
+  opacity: 1;
+  transform: translateX(0);
 }
 
 .code-card {
+  background: var(--code-bg, #1e293b);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  transform: rotateY(-10deg) rotateX(5deg);
+  transition: transform 0.5s ease;
+}
+
+.hero-card:hover .code-card {
+  transform: rotateY(0deg) rotateX(0deg);
+}
+
+.code-header {
+  display: flex;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  padding-left: 0.5rem;
+}
+
+.code-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+}
+.code-dot.red { background-color: #ff5f56; }
+.code-dot.yellow { background-color: #ffbd2e; }
+.code-dot.green { background-color: #27c93f; }
+
+.code-body {
   font-family: 'Fira Code', monospace;
-  font-size: 0.9rem;
-  color: var(--text-light);
+  font-size: 0.875rem;
   line-height: 1.6;
-  text-align: left;
+  color: #e2e8f0;
 }
 
-.code-line {
-  display: block;
-  margin-bottom: 8px;
-}
+.code-comment { color: #64748b; }
+.code-keyword { color: #f472b6; }
+.code-property { color: #818cf8; }
+.code-string { color: #a5b4fc; }
 
-.code-comment {
-  color: var(--accent-color);
-  opacity: 0.7;
-}
-
-.code-keyword {
-  color: var(--primary-color);
-  font-weight: 600;
-}
-
-.code-string {
-  color: var(--secondary-color);
-}
-
-.code-property {
-  color: var(--accent-color);
-}
-
+/* --- Scroll Indicator --- */
 .scroll-indicator {
   position: absolute;
-  bottom: 20px;
+  bottom: 2rem;
   left: 50%;
   transform: translateX(-50%);
   display: flex;
   flex-direction: column;
   align-items: center;
-  animation: fadeIn 1s ease-out 1s forwards, bounce 2s infinite;
-  opacity: 0;
+  gap: 0.5rem;
   cursor: pointer;
+  opacity: 0;
+  animation: fadeIn 1s ease 1.5s forwards;
 }
 
 .scroll-text {
   font-size: 0.8rem;
-  color: var(--text-light);
-  margin-bottom: 4px;
-  letter-spacing: 1px;
+  color: var(--text-secondary);
   text-transform: uppercase;
+  letter-spacing: 0.1em;
 }
 
 .scroll-icon {
-  font-size: 1.5rem;
-  color: var(--primary-color);
+  width: 24px;
+  height: 40px;
+  border: 2px solid var(--border-color);
+  border-radius: 12px;
+  position: relative;
 }
 
-@keyframes blink {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0; }
+.scroll-icon-wheel {
+  width: 4px;
+  height: 8px;
+  background: var(--text-secondary);
+  border-radius: 2px;
+  position: absolute;
+  top: 6px;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: scrollAnim 2s infinite;
 }
 
-@keyframes bounce {
-  0%, 20%, 50%, 80%, 100% { transform: translateY(0) translateX(-50%); }
-  40% { transform: translateY(-10px) translateX(-50%); }
-  60% { transform: translateY(-5px) translateX(-50%); }
+@keyframes scrollAnim {
+  0% { top: 6px; opacity: 1; }
+  100% { top: 20px; opacity: 0; }
 }
 
 @keyframes fadeIn {
-  from { opacity: 0; }
   to { opacity: 1; }
 }
 
-@keyframes slideInLeft {
-  from { transform: translateX(-50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
-@keyframes slideInRight {
-  from { transform: translateX(50px); opacity: 0; }
-  to { transform: translateX(0); opacity: 1; }
-}
-
 @media (max-width: 992px) {
-  .hero-content {
-    flex-direction: column;
-    text-align: center;
-  }
-  
-  .hero-text {
-    max-width: 100%;
-    animation: fadeIn 0.8s ease-out;
-  }
-  
-  .hero-card {
-    max-width: 100%;
-    animation: fadeIn 0.8s ease-out 0.3s forwards;
-    opacity: 0;
-  }
-  
-  .hero-buttons {
-    justify-content: center;
-  }
-}
-
-@media (max-width: 768px) {
-  .hero-container {
-    padding: 100px 0 60px;
-  }
-  
-  .hero-title {
-    font-size: 2.5rem;
-  }
-  
-  .hero-subtitle {
-    font-size: 1.4rem;
-  }
-  
-  .hero-buttons {
-    flex-direction: column;
-    align-items: center;
-    width: 100%;
-  }
-  
-  .hero-buttons .btn {
-    width: 100%;
-  }
+  .hero-card { display: none; }
 }
