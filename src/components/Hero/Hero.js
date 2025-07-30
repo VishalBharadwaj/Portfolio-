@@ -103,9 +103,8 @@ const Hero = ({ scrollToSection, isActive }) => {
         </div>
       </div>
       <div className="scroll-indicator" onClick={handleExploreClick}>
-        <span className="scroll-text">SCROLL DOWN</span>
-        <div className="mouse">
-            <div className="scroll-dot"></div>
+        <div className="mouse-icon">
+          <div className="wheel"></div>
         </div>
       </div>
     </div>

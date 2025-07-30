@@ -1,0 +1,84 @@
+/*
+  Definitive, robust, and simple CSS for a seamless marquee effect.
+  This implementation uses the standard 'width: 200%' and 'translateX(-50%)' technique.
+*/
+
+/* --- Section and Header Styling --- */
+.gallery-section {
+  width: 100%;
+  padding: 80px 0;
+  background-color: transparent;
+  overflow: hidden;
+}
+
+.gallery-header {
+  text-align: center;
+  margin-bottom: 50px;
+}
+
+.gallery-header h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: #fff;
+  margin-bottom: 10px;
+}
+
+.gallery-header p {
+  font-size: 1.1rem;
+  color: #a0a0a0;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+.gallery-container {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* --- Core Marquee Implementation --- */
+
+/* 1. The outer container that masks the overflow. */
+.gallery-row {
+  display: flex;
+  overflow: hidden;
+}
+
+/* 2. The inner container that holds the duplicated content and animates. */
+.gallery-inner-row {
+  display: flex;
+  flex-wrap: nowrap; /* Ensures the row never wraps */
+  flex-shrink: 0;
+  width: fit-content; /* Let the content define the width */
+}
+
+/* 3. Pause animation on hover for better UX. */
+
+
+/* --- Image Styling --- */
+.gallery-inner-row img {
+  height: 200px;
+  width: auto;
+  margin: 0 10px;
+  border-radius: 12px;
+  flex-shrink: 0; /* CRITICAL: Prevents images from being squished. */
+  object-fit: cover;
+  transition: transform 0.3s ease;
+}
+
+.gallery-inner-row img:hover {
+  transform: scale(1.05);
+}
+
+/* --- Responsive Design --- */
+@media (max-width: 768px) {
+  .gallery-inner-row img {
+    height: 150px;
+  }
+}
+
+@media (max-width: 480px) {
+  .gallery-inner-row img {
+    height: 120px;
+  }
+}

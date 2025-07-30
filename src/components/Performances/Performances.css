@@ -1,0 +1,106 @@
+/* === Performance Highlights Section === */
+.extracurriculars-section .section-header {
+    text-align: center;
+    margin-bottom: 5rem;
+}
+
+.performance-list {
+    display: flex;
+    flex-direction: column;
+    gap: 6rem; /* Increased gap for a more dramatic separation */
+}
+
+.performance-card {
+    display: flex;
+    align-items: center;
+    gap: 4rem;
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 0.8s ease-out, transform 0.8s ease-out;
+}
+
+/* Staggered animation delay */
+.performance-card:nth-child(2) { transition-delay: 0.2s; }
+.performance-card:nth-child(3) { transition-delay: 0.4s; }
+
+.performance-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.performance-image {
+    flex: 1 1 55%;
+    overflow: hidden;
+    border-radius: 12px;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.2);
+}
+
+.performance-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+    border-radius: 12px;
+    transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.performance-image:hover img {
+    transform: scale(1.05);
+}
+
+.performance-details {
+    flex: 1 1 45%;
+    padding: 1rem;
+}
+
+/* Alternating layout */
+.performance-card.layout-reversed {
+    flex-direction: row-reverse;
+}
+
+.event-tag {
+    display: inline-block;
+    background-color: var(--accent-color-light);
+    color: var(--accent-color);
+    padding: 0.5rem 1rem;
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    margin-bottom: 1.5rem;
+    letter-spacing: 0.5px;
+}
+
+.performance-details h3 {
+    font-size: 2.5rem; /* Larger headline */
+    font-weight: 700;
+    color: var(--primary-text-color);
+    margin-bottom: 1rem;
+    line-height: 1.2;
+}
+
+.performance-details p {
+    font-size: 1.5rem; /* Larger audience text */
+    color: var(--secondary-text-color);
+    font-weight: 500;
+}
+
+/* === Responsive Design === */
+@media (max-width: 992px) {
+    .performance-card,
+    .performance-card.layout-reversed {
+        flex-direction: column;
+        gap: 2rem;
+        text-align: center;
+    }
+
+    .performance-details {
+        padding: 0;
+    }
+
+    .performance-details h3 {
+        font-size: 2rem;
+    }
+
+    .performance-details p {
+        font-size: 1.2rem;
+    }
+}

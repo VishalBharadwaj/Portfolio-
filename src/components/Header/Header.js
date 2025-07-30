@@ -9,6 +9,9 @@ const MailIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height
 const SunIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="12" r="4"/><path d="M12 2v2"/><path d="M12 20v2"/><path d="m4.93 4.93 1.41 1.41"/><path d="m17.66 17.66 1.41 1.41"/><path d="M2 12h2"/><path d="M20 12h2"/><path d="m6.34 17.66-1.41 1.41"/><path d="m19.07 4.93-1.41 1.41"/></svg>;
 const MoonIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>;
 const CertificateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>;
+const TrophyIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M6 9H4.5a2.5 2.5 0 0 1 0-5H6"/><path d="M18 9h1.5a2.5 2.5 0 0 0 0-5H18"/><path d="M4 22h16"/><path d="M10 14.66V17c0 .55-.47.98-.97 1.21C7.85 18.75 7 20.24 7 22"/><path d="M14 14.66V17c0 .55.47.98.97 1.21C16.15 18.75 17 20.24 17 22"/><path d="M18 2H6v7a6 6 0 0 0 12 0V2Z"/></svg>;
+const ImageIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect><circle cx="8.5" cy="8.5" r="1.5"></circle><polyline points="21 15 16 10 5 21"></polyline></svg>;
+const BrushIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.06 11.9 3.42 17.53a2.83 2.83 0 0 0 4 4L13.1 15.8"/><path d="m21.7 2.2-1.4 1.4"/><path d="M15.8 8.9 3.42 21.27"/><path d="m21.7 2.2-1.4 1.4"/><path d="m15.8 8.9 3.4-3.4"/><path d="M9.06 11.9 3.42 17.53a2.83 2.83 0 0 0 4 4L13.1 15.8"/><path d="M14.7 15.3 21 9l-4-4-6.3 6.3"/><path d="M9 8.5h.01"/></svg>;
 
 const Header = ({ activeSection, scrollToSection, theme, toggleTheme, toast }) => {
     const [isScrolled, setIsScrolled] = useState(false);
@@ -22,11 +25,14 @@ const Header = ({ activeSection, scrollToSection, theme, toggleTheme, toast }) =
         return () => window.removeEventListener('scroll', handleScroll);
     }, []);
 
-    const navItems = [
+        const navItems = [
         { id: 'about', label: 'About', icon: <UserIcon /> },
         { id: 'certificates', label: 'Certificates', icon: <CertificateIcon /> },
+        { id: 'hackathons', label: 'Hackathons', icon: <TrophyIcon /> },
+        { id: 'performances', label: 'Performances', icon: <ZapIcon /> },
         { id: 'projects', label: 'Projects', icon: <RocketIcon /> },
-        { id: 'extracurriculars', label: 'Extracurriculars', icon: <ZapIcon /> },
+        { id: 'gallery', label: 'Gallery', icon: <ImageIcon /> },
+        { id: 'designs', label: 'Designs', icon: <BrushIcon /> },
         { id: 'contact', label: 'Contact', icon: <MailIcon /> }
     ];
 

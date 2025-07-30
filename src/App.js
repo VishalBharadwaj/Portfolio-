@@ -5,10 +5,12 @@ import './App.css';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import Extracurriculars from './components/Extracurriculars/Extracurriculars';
+import Performances from './components/Performances/Performances';
 import Certificates from './components/Certificates/Certificates';
 import Hackathons from './components/Hackathons/Hackathons';
 import Projects from './components/Projects/Projects';
+import Gallery from './components/Gallery/Gallery';
+import SpotlightGallery from './components/SpotlightGallery/SpotlightGallery';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen.js';
@@ -26,13 +28,15 @@ function App() {
   const [toast, setToast] = useState({ show: false, message: '', key: 0 });
   
   // --- LOGIC FROM YOUR NEW CODE ---
-  const sectionRefs = useMemo(() => ({
+    const sectionRefs = useMemo(() => ({
     hero: React.createRef(),
     about: React.createRef(),
-    extracurriculars: React.createRef(),
     certificates: React.createRef(),
     hackathons: React.createRef(),
-    projects: React.createRef(),
+    performances: React.createRef(),
+        projects: React.createRef(),
+        gallery: React.createRef(),
+    designs: React.createRef(),
     contact: React.createRef(),
   }), []);
 
@@ -88,10 +92,10 @@ function App() {
     };
     
     // --- INTERSECTION OBSERVER LOGIC ---
-    const observerOptions = {
+        const observerOptions = {
       root: null,
-      rootMargin: '0px',
-      threshold: 0.5
+      rootMargin: '-40% 0px -60% 0px', // Creates a horizontal trigger line in the middle
+      threshold: 0
     };
 
     const observerCallback = (entries) => {
@@ -161,8 +165,10 @@ function App() {
           <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
           <section id="certificates" ref={sectionRefs.certificates}><Certificates isActive={activeSection === 'certificates'} /></section>
           <section id="hackathons" ref={sectionRefs.hackathons}><Hackathons isActive={activeSection === 'hackathons'} /></section>
-          <section id="extracurriculars" ref={sectionRefs.extracurriculars}><Extracurriculars isActive={activeSection === 'extracurriculars'} /></section>
-          <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+          <section id="performances" ref={sectionRefs.performances}><Performances isActive={activeSection === 'performances'} /></section>
+                    <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+                    <section id="gallery" ref={sectionRefs.gallery}><Gallery isActive={activeSection === 'gallery'} /></section>
+          <SpotlightGallery />
           <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
         </main>
         

@@ -1,0 +1,76 @@
+.spotlight-gallery-section {
+  padding: 2rem;
+  text-align: center;
+  background-color: transparent;
+  overflow: hidden; /* Important to contain the spotlight */
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.spotlight-gallery-section .header-text h2 {
+  font-size: 2.5rem;
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.spotlight-gallery-section .header-text p {
+  font-size: 1.1rem;
+  color: #a0a0a0;
+  margin-bottom: 3rem;
+}
+
+.spotlight-container {
+  position: relative;
+  width: 90%;
+  max-width: 1400px;
+  margin: 3rem auto 0;
+  cursor: none;
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+.spotlight {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 250px;
+  height: 250px;
+  background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0) 70%);
+  border-radius: 50%;
+  pointer-events: none; /* Make sure it doesn't block mouse events on items */
+  z-index: 2;
+  filter: blur(20px);
+}
+
+.gallery-grid {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 2rem;
+  position: relative;
+  z-index: 1;
+}
+
+.gallery-item {
+  aspect-ratio: 1 / 1;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease, filter 0.3s ease;
+  filter: brightness(0.2); /* Initially dimmed */
+  will-change: transform, filter;
+}
+
+.gallery-item img,
+.gallery-item video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  position: absolute;
+  top: 0;
+  left: 0;
+}

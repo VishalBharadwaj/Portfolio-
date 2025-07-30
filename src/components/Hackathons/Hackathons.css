@@ -1,132 +1,182 @@
-/* === Hackathons Section === */
-.hackathons-section {
-    padding: 6rem 0;
-    background-color: var(--background-color-light);
-    opacity: 0;
-    transform: translateY(50px);
-    transition: opacity 1s ease-out, transform 1s ease-out;
-}
-
-.hackathons-section.is-visible {
-    opacity: 1;
-    transform: translateY(0);
-}
-
-.hackathon-header {
+/* === Hackathons Section General Styling === */
+.hackathons-section .section-header {
     text-align: center;
     margin-bottom: 4rem;
 }
 
-.hackathon-header h1 {
-    font-size: 3rem;
+.hackathons-section .section-header h2 {
+    font-size: 2.8rem;
     font-weight: 700;
     color: var(--primary-text-color);
 }
 
-.hackathon-awards {
-    font-size: 1.5rem;
-    font-weight: 600;
-    color: var(--accent-color);
-    margin-top: 0.5rem;
-}
-
-.hackathon-content {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
+.hackathons-list {
+    display: flex;
+    flex-direction: column;
     gap: 4rem;
-    align-items: flex-start;
 }
 
-.hackathon-text h2 {
-    font-size: 2rem;
+/* === Hackathon Card Styling === */
+.hackathon-card {
+    background-color: var(--card-background-color);
+    border-radius: 16px;
+    padding: 2.5rem;
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+    display: flex;
+    gap: 3rem;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    /* Entrance Animation */
+    opacity: 0;
+    transform: translateY(40px);
+}
+
+.hackathon-card.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hackathon-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* === Card Content Layout === */
+.hackathon-text-content {
+    flex: 1 1 55%;
+}
+
+.hackathon-image-gallery {
+    flex: 1 1 45%;
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+/* === Text Content Typography === */
+.hackathon-text-content h3 {
+    font-size: 1.8rem;
     font-weight: 600;
     color: var(--primary-text-color);
+    margin-bottom: 0.25rem;
+}
+
+.hackathon-text-content .award {
+    color: var(--accent-color);
+    font-weight: 600;
+}
+
+.hackathon-text-content h4 {
+    font-size: 1.3rem;
+    font-weight: 500;
+    color: var(--secondary-text-color);
     margin-bottom: 1rem;
 }
 
-.hackathon-text h3 {
-    font-size: 1.2rem;
-    color: var(--secondary-text-color);
+.hackathon-text-content .role {
+    font-size: 1.1rem;
     margin-bottom: 1.5rem;
+    color: var(--primary-text-color);
 }
 
-.hackathon-text p {
-    font-size: 1rem;
-    line-height: 1.7;
+.hackathon-text-content p {
+    line-height: 1.6;
     color: var(--secondary-text-color);
     margin-bottom: 2rem;
 }
 
-.team-showcase {
-    background-color: var(--card-background-color);
-    padding: 1.5rem;
-    border-radius: 8px;
-    border-left: 4px solid var(--accent-color);
-}
-
-.team-showcase h4 {
-    font-size: 1.3rem;
-    margin-bottom: 1rem;
+.team-info h5 {
+    font-size: 1.1rem;
+    font-weight: 600;
     color: var(--primary-text-color);
+    margin-bottom: 0.75rem;
+    border-bottom: 1px solid var(--border-color);
+    padding-bottom: 0.5rem;
 }
 
-.team-showcase ul {
+.team-info ul {
     list-style: none;
     padding: 0;
 }
 
-.team-showcase li {
-    font-size: 1rem;
+.team-info li {
+    margin-bottom: 0.25rem;
     color: var(--secondary-text-color);
-    margin-bottom: 0.5rem;
 }
 
-.hackathon-gallery {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 1rem;
-}
-
-.gallery-image {
+/* === Swiper Slideshow Styling === */
+.hackathon-image-gallery {
+    position: relative;
+    width: 100%;
+    border-radius: 12px;
     overflow: hidden;
-    border-radius: 8px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
 }
 
-.gallery-image img {
+.hackathon-swiper {
+    width: 100%;
+    height: 400px; /* Set a fixed height for the container */
+}
+
+.hackathon-swiper .swiper-slide img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: cover; /* Fill the container, crop if necessary */
     display: block;
-    transition: transform 0.4s ease, filter 0.4s ease;
 }
 
-.gallery-image:hover img {
-    transform: scale(1.08);
-    filter: brightness(1.1);
+/* Custom Navigation Arrows */
+.hackathon-swiper .swiper-button-next,
+.hackathon-swiper .swiper-button-prev {
+    color: #ffffff;
+    background-color: rgba(0, 0, 0, 0.4);
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: background-color 0.3s ease;
+}
+
+.hackathon-swiper .swiper-button-next:hover,
+.hackathon-swiper .swiper-button-prev:hover {
+    background-color: rgba(0, 0, 0, 0.7);
+}
+
+.hackathon-swiper .swiper-button-next::after,
+.hackathon-swiper .swiper-button-prev::after {
+    font-size: 18px;
+    font-weight: 900;
+}
+
+/* Custom Pagination Dots */
+.hackathon-swiper .swiper-pagination-bullet {
+    background-color: rgba(255, 255, 255, 0.7);
+    width: 10px;
+    height: 10px;
+    opacity: 0.8;
+    transition: background-color 0.3s ease, transform 0.3s ease;
+}
+
+.hackathon-swiper .swiper-pagination-bullet-active {
+    background-color: var(--accent-color);
+    transform: scale(1.2);
 }
 
 /* === Responsive Design === */
 @media (max-width: 992px) {
-    .hackathon-content {
-        grid-template-columns: 1fr;
-    }
-
-    .hackathon-gallery {
-        grid-template-columns: repeat(3, 1fr);
+    .hackathon-card {
+        flex-direction: column;
     }
 }
 
-@media (max-width: 768px) {
-    .hackathon-header h1 {
-        font-size: 2.5rem;
+@media (max-width: 576px) {
+    .hackathon-text-content h3 {
+        font-size: 1.5rem;
     }
 
-    .hackathon-awards {
-        font-size: 1.2rem;
+    .hackathon-text-content h4 {
+        font-size: 1.1rem;
     }
 
-    .hackathon-gallery {
-        grid-template-columns: repeat(2, 1fr);
-    }
+    /* No specific changes needed for slideshow on this breakpoint */
 }
