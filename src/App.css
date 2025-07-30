@@ -3,47 +3,47 @@
 
 /* CSS Variables */
 :root {
-  /* Dark Theme (Default) */
-  --primary-color: #3b82f6;
-  --primary-color-rgb: 59, 130, 246;
-  --secondary-color: #8b5cf6;
-  --secondary-color-rgb: 139, 92, 246;
-  --accent-color: #f59e0b;
-  --accent-color-rgb: 245, 158, 11;
-  --text-dark: #f9fafb;
-  --text-light: #e5e7eb;
-  --text-muted: #9ca3af;
-  --background-light: #1f2937;
-  --background-white: #111827;
-  --background-card: #1f2937;
-  --border-color: #374151;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.3);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3);
-  --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  --gradient-background: linear-gradient(135deg, #00001a, #0c0c2b);
+  /* Light Theme: 'Aurora Glass' */
+  --primary-color: #6d28d9; /* Professional Indigo */
+  --primary-color-rgb: 109, 40, 217;
+  --secondary-color: #5b21b6; /* Darker Indigo for hover */
+  --secondary-color-rgb: 91, 33, 182;
+  --accent-color: #6d28d9;
+  --accent-color-rgb: 109, 40, 217;
+  --text-dark: #111827; /* Dark Charcoal */
+  --text-light: #374151; /* Darker Gray for readability */
+  --text-muted: #6b7280;
+  --background-light: transparent;
+  --background-white: transparent;
+  --background-card: rgba(255, 255, 255, 0.5);
+  --border-color: rgba(255, 255, 255, 0.3);
+  --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1);
+  --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+  --gradient-primary: linear-gradient(135deg, #6d28d9, #8b5cf6);
+  --gradient-background: transparent; /* Background is handled by AuroraBackground component */
 }
 
-/* Light Theme */
-[data-theme='light'] {
-  --primary-color: #0070f3;
-  --primary-color-rgb: 0, 112, 243;
-  --secondary-color: #6d28d9;
-  --secondary-color-rgb: 109, 40, 217;
-  --accent-color: #f59e0b;
-  --accent-color-rgb: 245, 158, 11;
-  --text-dark: #111827;
-  --text-light: #6b7280;
-  --text-muted: #9ca3af;
-  --background-light: #f9fafb;
-  --background-white: #ffffff;
-  --background-card: #ffffff;
-  --border-color: #e5e7eb;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  --gradient-primary: linear-gradient(135deg, #0070f3, #6d28d9);
-  --gradient-background: #f9fafb;
+[data-theme='dark'] {
+  /* Dark Theme: 'Deep Space' */
+  --primary-color: #64ffda; /* Electric Cyan */
+  --primary-color-rgb: 100, 255, 218;
+  --secondary-color: #00c7a3; /* Darker Cyan for hover */
+  --secondary-color-rgb: 0, 199, 163;
+  --accent-color: #64ffda;
+  --accent-color-rgb: 100, 255, 218;
+  --text-dark: #ccd6f6; /* Off-White */
+  --text-light: #8892b0; /* Softer Gray */
+  --text-muted: #a8b2d1;
+  --background-light: #112240;
+  --background-white: #0a192f;
+  --background-card: #112240;
+  --border-color: #233554;
+  --shadow-sm: 0 1px 2px 0 rgba(2, 12, 27, 0.7);
+  --shadow-md: 0 4px 6px -1px rgba(2, 12, 27, 0.7);
+  --shadow-lg: 0 10px 15px -3px rgba(2, 12, 27, 0.7);
+  --gradient-primary: linear-gradient(135deg, #64ffda, #00c7a3);
+  --gradient-background: #0a192f;
 }
 
 /* Global Reset */
@@ -255,13 +255,31 @@ section.active {
 }
 
 /* Cards */
-.card {
+/* Glassmorphism effect for light theme cards and header */
+[data-theme='light'] .card,
+[data-theme='light'] .header-nav {
   background-color: var(--background-card);
   border-radius: 12px;
   box-shadow: var(--shadow-md);
+  border: 1px solid var(--border-color);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}
+
+.card {
   padding: 1.5rem;
   transition: transform 0.3s ease, box-shadow 0.3s ease;
-  border: 1px solid var(--border-color);
+}
+
+[data-theme='dark'] .card {
+    background-color: var(--background-card);
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow-md);
+}
+
+.card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
 }
 
 .card:hover {

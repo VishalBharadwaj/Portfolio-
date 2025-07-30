@@ -10,10 +10,11 @@ import Certificates from './components/Certificates/Certificates';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
-import LoadingScreen from './components/LoadingScreen/LoadingScreen';
+import LoadingScreen from './components/LoadingScreen/LoadingScreen.js';
 import FloatingActionButton from './components/FloatingActionButton/FloatingActionButton';
 import BackgroundTiles from './components/BackgroundTiles/BackgroundTiles';
 import StarfieldBackground from './components/StarfieldBackground/StarfieldBackground';
+import AuroraBackground from './components/AuroraBackground/AuroraBackground';
 import InteractiveCursor from './components/InteractiveCursor/InteractiveCursor';
 
 
@@ -36,13 +37,7 @@ function App() {
   // --- LOGIC FROM MY SUGGESTION (INTEGRATED) ---
   const [scrollProgress, setScrollProgress] = useState(0);
 
-  // Handle loading screen
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 2000);
-    return () => clearTimeout(timer);
-  }, []);
+
 
   // Handle theme toggle
   const toggleTheme = () => {
@@ -135,42 +130,47 @@ function App() {
     }
   };
 
-  if (isLoading) {
-    return <LoadingScreen />;
-  }
+
 
   return (
-    <div className="App">
-      <StarfieldBackground />
-      <InteractiveCursor />
-
-      <div id="noise-overlay"></div>
-      <BackgroundTiles />
-      <Header 
-        activeSection={activeSection} 
-        scrollToSection={scrollToSection} 
-        theme={theme} 
-        toggleTheme={toggleTheme}
-        toast={toast} 
-      />
-      
-      <main>
-        <div id="hero" ref={sectionRefs.hero}><Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} /></div>
-        <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
-        <section id="certificates" ref={sectionRefs.certificates}><Certificates isActive={activeSection === 'certificates'} /></section>
-        <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
-        <section id="extracurriculars" ref={sectionRefs.extracurriculars}><Extracurriculars isActive={activeSection === 'extracurriculars'} /></section>
-        <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
-      </main>
-      
-      <Footer />
-      
-      {/* Pass the scrollProgress state to the FAB */}
-      <FloatingActionButton 
-        scrollToSection={scrollToSection} 
-        scrollProgress={scrollProgress} 
-      />
-    </div>
+    <>
+      {isLoading && <LoadingScreen onLoaded={() => setIsLoading(false)} />}
+      <div className="App">
+        {theme === 'dark' ? (
+          <>
+            <StarfieldBackground />
+            <div id="noise-overlay"></div>
+            <BackgroundTiles />
+          </>
+        ) : (
+          <AuroraBackground />
+        )}
+        <InteractiveCursor />
+        <Header 
+          activeSection={activeSection} 
+          scrollToSection={scrollToSection} 
+          theme={theme} 
+          toggleTheme={toggleTheme}
+          toast={toast} 
+        />
+        
+        <main>
+          <div id="hero" ref={sectionRefs.hero}><Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} /></div>
+          <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
+          <section id="certificates" ref={sectionRefs.certificates}><Certificates isActive={activeSection === 'certificates'} /></section>
+          <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+          <section id="extracurriculars" ref={sectionRefs.extracurriculars}><Extracurriculars isActive={activeSection === 'extracurriculars'} /></section>
+          <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
+        </main>
+        
+        <Footer />
+        
+        <FloatingActionButton 
+          scrollToSection={scrollToSection} 
+          scrollProgress={scrollProgress} 
+        />
+      </div>
+    </>
   );
 }
 
