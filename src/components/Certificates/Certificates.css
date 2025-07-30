@@ -1,24 +1,24 @@
-.services-section {
+.certificates-section {
   padding: 100px 0;
-  background-color: var(--background-light);
+  background-color: var(--background-white);
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease;
 }
 
-.services-section.active {
+.certificates-section.active {
   opacity: 1;
   transform: translateY(0);
 }
 
-.services-grid {
+.certificates-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
   gap: 32px;
 }
 
-.service-card {
-  background-color: var(--background-white);
+.certificate-card {
+  background-color: var(--background-light);
   padding: 40px 32px;
   border-radius: 12px;
   text-align: center;
@@ -27,28 +27,47 @@
   border: 1px solid var(--border-color);
 }
 
-.service-card:hover {
+.certificate-card:hover {
   transform: translateY(-8px);
   box-shadow: var(--shadow-lg);
 }
 
-.service-icon {
+.certificate-icon {
   font-size: 3rem;
   margin-bottom: 24px;
 }
 
-.service-card h3 {
+.certificate-card h3 {
   margin-bottom: 16px;
   color: var(--text-dark);
 }
 
-.service-card p {
+.certificate-card p {
   color: var(--text-light);
   line-height: 1.6;
 }
 
+/* --- Responsive Styles for Certificates Section --- */
+
+/* Tablet Styles */
 @media (max-width: 768px) {
-  .services-grid {
-    grid-template-columns: 1fr;
+  .certificates-section {
+    padding: 80px 0;
+  }
+  .certificates-grid {
+    gap: 24px;
+  }
+}
+
+/* Mobile Styles */
+@media (max-width: 480px) {
+  .certificates-section {
+    padding: 60px 0;
+  }
+  .certificate-card {
+    padding: 32px 24px;
+  }
+  .certificate-icon {
+    font-size: 2.5rem;
   }
 }

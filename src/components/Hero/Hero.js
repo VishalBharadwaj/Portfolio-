@@ -4,7 +4,7 @@ import './Hero.css';
 const Hero = ({ scrollToSection, isActive }) => {
   const [typedText, setTypedText] = useState('');
   // Updated text based on your LinkedIn profile
-  const heroTexts = useRef(["Cloud Practitioner", "Cyber Security Enthusiast", "Speaker", "Master of Ceremonies (MC)" ]);
+  const heroTexts = useRef(["Cloud Practitioner", "Cyber Security Enthusiast", "Public Speaker", "Master of Ceremonies (MC)" ]);
   const heroRef = useRef(null);
 
   // A more robust typing animation hook
@@ -57,7 +57,7 @@ const Hero = ({ scrollToSection, isActive }) => {
     <div className={`hero-container ${isActive ? 'active' : ''}`} ref={heroRef}>
       <div className="container hero-grid">
         <div className="hero-text">
-          <h1 className="hero-title">Hi, I'm <span className="highlight">Vishal</span></h1>
+          <h1 className="hero-title">Hi, I'm <span className="highlight">Vishal Bharadwaj</span></h1>
           <h2 className="hero-subtitle">
             <span className="static-text">I'm a </span>
             <span className="typed-text">{typedText}</span>

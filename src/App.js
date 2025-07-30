@@ -5,7 +5,8 @@ import './App.css';
 import Header from './components/Header/Header';
 import Hero from './components/Hero/Hero';
 import About from './components/About/About';
-import Services from './components/Services/Services';
+import Extracurriculars from './components/Extracurriculars/Extracurriculars';
+import Certificates from './components/Certificates/Certificates';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
@@ -22,7 +23,8 @@ function App() {
   const sectionRefs = {
     hero: useRef(null),
     about: useRef(null),
-    services: useRef(null),
+    extracurriculars: useRef(null),
+    certificates: useRef(null),
     projects: useRef(null),
     contact: useRef(null)
   };
@@ -123,8 +125,9 @@ function App() {
       <main>
         <div id="hero" ref={sectionRefs.hero}><Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} /></div>
         <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
-        <section id="services" ref={sectionRefs.services}><Services isActive={activeSection === 'services'} /></section>
+        <section id="certificates" ref={sectionRefs.certificates}><Certificates isActive={activeSection === 'certificates'} /></section>
         <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+        <section id="extracurriculars" ref={sectionRefs.extracurriculars}><Extracurriculars isActive={activeSection === 'extracurriculars'} /></section>
         <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
       </main>
       

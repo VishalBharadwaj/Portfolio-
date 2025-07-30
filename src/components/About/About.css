@@ -119,6 +119,76 @@
     color: var(--text-color);
 }
 
+/* --- Responsive Styles for About Section --- */
+
+/* Tablet Styles */
+@media (max-width: 991px) {
+    .about-section {
+        padding: 4rem 0;
+    }
+
+    .about-content {
+        gap: 2.5rem;
+    }
+
+    .about-text p {
+        font-size: 1rem;
+    }
+}
+
+/* Mobile Styles */
+@media (max-width: 767px) {
+    .about-section {
+        padding: 3rem 0;
+    }
+
+    .section-header {
+        margin-bottom: 3rem;
+    }
+
+    .section-header h2 {
+        font-size: 2rem;
+    }
+
+    .section-header .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .about-content {
+        grid-template-areas: "image" "text";
+    }
+
+    .about-text {
+        grid-area: text;
+        text-align: center;
+    }
+    
+    .about-image {
+        grid-area: image;
+        max-width: 300px; /* Smaller image for mobile */
+    }
+
+    .skills-header {
+        margin: 2rem auto 1.5rem; /* Center the header */
+    }
+
+    .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(100px, 1fr));
+        gap: 0.75rem;
+    }
+}
+
+.skill-icon {
+    color: var(--primary-color);
+    width: 24px;
+    height: 24px;
+}
+
+.skill-name {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
 /* --- Entrance Animations --- */
 .about-image, .about-text > *, .skill-item {
     opacity: 0;

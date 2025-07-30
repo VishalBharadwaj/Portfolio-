@@ -102,16 +102,50 @@
   min-height: 120px;
 }
 
-@media (max-width: 768px) {
+/* --- Responsive Styles for Contact Section --- */
+
+/* Tablet and below */
+@media (max-width: 992px) {
   .contact-content {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr; /* Stack info and form */
     gap: 40px;
   }
-  
-  .form-row {
-    grid-template-columns: 1fr;
+
+  .contact-info {
+    text-align: center; /* Center the text when stacked */
   }
-  
+
+  .contact-details,
+  .social-links {
+    justify-content: center; /* Center these items */
+    flex-wrap: wrap; /* Allow wrapping if needed */
+  }
+}
+
+/* Mobile and below */
+@media (max-width: 768px) {
+  .contact-section {
+    padding: 80px 0;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr; /* Stack form fields */
+    gap: 0; /* Remove gap as they are stacked */
+  }
+
+  .contact-form {
+    padding: 32px;
+  }
+}
+
+/* Small mobile */
+@media (max-width: 480px) {
+  .contact-section {
+    padding: 60px 0;
+  }
+  .contact-info h2 {
+    font-size: 1.75rem;
+  }
   .contact-form {
     padding: 24px;
   }
