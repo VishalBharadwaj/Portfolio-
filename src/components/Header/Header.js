@@ -10,7 +10,7 @@ const SunIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height=
 const MoonIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M12 3a6 6 0 0 0 9 9 9 9 0 1 1-9-9Z"/></svg>;
 const CertificateIcon = () => <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>;
 
-const Header = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
+const Header = ({ activeSection, scrollToSection, theme, toggleTheme, toast }) => {
     const [isScrolled, setIsScrolled] = useState(false);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
@@ -34,6 +34,8 @@ const Header = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
         scrollToSection(sectionId);
         setIsMobileMenuOpen(false);
     };
+
+
     
     useEffect(() => {
         document.body.style.overflow = isMobileMenuOpen ? 'hidden' : 'auto';
@@ -47,34 +49,44 @@ const Header = ({ activeSection, scrollToSection, theme, toggleTheme }) => {
                         <img src="/profile_picture.png" alt="Vishal Bharadwaj" className="logo-image" />
                     </button>
                 </div>
-                
-                <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
-                    <ul>
-                        {navItems.map((item) => (
-                            <li key={item.id}>
-                                <button 
-                                    onClick={() => handleNavClick(item.id)}
-                                    className={activeSection === item.id ? 'active' : ''}
-                                >   
-                                    <span className="nav-icon">{item.icon}</span>
-                                    <span className="nav-label">{item.label}</span>
-                                </button>
-                            </li>
-                        ))}
-                    </ul>
-                </nav>
 
-                <div className="header-actions">
-                    <button className="theme-toggle" onClick={toggleTheme} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
-                        {theme === 'light' ? <MoonIcon /> : <SunIcon />}
-                    </button>
-                    
-                    <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
-                        {isMobileMenuOpen ? 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> : 
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
-                        }
-                    </button>
+                <div className="header-right">
+                    <nav className={`nav ${isMobileMenuOpen ? 'nav-open' : ''}`}>
+                        <ul>
+                            {navItems.map((item) => (
+                                <li key={item.id}>
+                                    <button 
+                                        onClick={() => handleNavClick(item.id)}
+                                        className={`${activeSection === item.id ? 'active' : ''} hoverable`}
+                                    >   
+                                        <span className="nav-icon">{item.icon}</span>
+                                        <span className="nav-label">{item.label}</span>
+                                    </button>
+                                </li>
+                            ))}
+                        </ul>
+                    </nav>
+
+                    <div className="header-actions">
+                        <div className="theme-toggle-wrapper">
+                            <button className="theme-toggle hoverable" onClick={toggleTheme} title={`Switch to ${theme === 'light' ? 'dark' : 'light'} mode`}>
+                                {theme === 'light' ? <MoonIcon /> : <SunIcon />}
+                            </button>
+                            {toast.show && (
+                                <div key={toast.key} className="theme-toast">
+                                    {theme === 'light' ? <SunIcon /> : <MoonIcon />}
+                                    <span>{toast.message}</span>
+                                </div>
+                            )}
+                        </div>
+                        
+                        <button className="mobile-menu-toggle" onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)} aria-label="Toggle menu">
+                            {isMobileMenuOpen ? 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg> : 
+                                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="3" y1="12" x2="21" y2="12"></line><line x1="3" y1="6" x2="21" y2="6"></line><line x1="3" y1="18" x2="21" y2="18"></line></svg>
+                            }
+                        </button>
+                    </div>
                 </div>
             </div>
         </header>

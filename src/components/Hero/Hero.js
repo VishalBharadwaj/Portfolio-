@@ -67,10 +67,10 @@ const Hero = ({ scrollToSection, isActive }) => {
             I build and design web applications, specializing in the MERN stack. I'm passionate about creating clean, efficient code and intuitive user interfaces.
           </p>
           <div className="hero-buttons">
-            <button className="btn btn-primary" onClick={handleExploreClick}>
+            <button className="btn btn-primary hoverable" onClick={handleExploreClick}>
               Explore My Work
             </button>
-            <button className="btn btn-secondary" onClick={() => scrollToSection('contact')}>
+            <button className="btn btn-secondary hoverable" onClick={() => scrollToSection('contact')}>
               Get In Touch
             </button>
           </div>
@@ -103,9 +103,9 @@ const Hero = ({ scrollToSection, isActive }) => {
         </div>
       </div>
       <div className="scroll-indicator" onClick={handleExploreClick}>
-        <span className="scroll-text">Scroll Down</span>
-        <div className="scroll-icon">
-            <div className="scroll-icon-wheel"></div>
+        <span className="scroll-text">SCROLL DOWN</span>
+        <div className="mouse">
+            <div className="scroll-dot"></div>
         </div>
       </div>
     </div>

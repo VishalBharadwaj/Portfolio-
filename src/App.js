@@ -13,11 +13,15 @@ import Footer from './components/Footer/Footer';
 import LoadingScreen from './components/LoadingScreen/LoadingScreen';
 import FloatingActionButton from './components/FloatingActionButton/FloatingActionButton';
 import BackgroundTiles from './components/BackgroundTiles/BackgroundTiles';
+import StarfieldBackground from './components/StarfieldBackground/StarfieldBackground';
+import InteractiveCursor from './components/InteractiveCursor/InteractiveCursor';
+
 
 function App() {
   const [activeSection, setActiveSection] = useState('hero');
   const [isLoading, setIsLoading] = useState(true);
-  const [theme, setTheme] = useState('light');
+  const [theme, setTheme] = useState('dark');
+  const [toast, setToast] = useState({ show: false, message: '', key: 0 });
   
   // --- LOGIC FROM YOUR NEW CODE ---
   const sectionRefs = {
@@ -45,9 +49,32 @@ function App() {
     const newTheme = theme === 'light' ? 'dark' : 'light';
     setTheme(newTheme);
     document.body.setAttribute('data-theme', newTheme);
+
+    // Define toast messages for each theme transition
+    const darkThemeToastMessages = [
+      "Ah, my eyes! Welcome back to the dark side.",
+      "Good choice. The darkness suits you.",
+      "Readjusting retinas... Welcome home.",
+      "Hello, darkness, my old friend.",
+    ];
+    const lightThemeToastMessages = [
+      "You've stepped into the light!",
+      "Here comes the sun!",
+      "A bright idea!",
+      "Let there be light!",
+    ];
+
+    const messages = newTheme === 'dark' ? darkThemeToastMessages : lightThemeToastMessages;
+    const message = messages[Math.floor(Math.random() * messages.length)];
+
+    // Trigger the toast
+    setToast({ show: true, message, key: Date.now() });
+    setTimeout(() => {
+      setToast(current => ({ ...current, show: false }));
+    }, 3500); // Hide after 3.5s
   };
 
-  // Set initial theme
+  // Set initial theme on load
   useEffect(() => {
     document.body.setAttribute('data-theme', theme);
   }, [theme]);
@@ -114,12 +141,17 @@ function App() {
 
   return (
     <div className="App">
+      <StarfieldBackground />
+      <InteractiveCursor />
+
+      <div id="noise-overlay"></div>
       <BackgroundTiles />
       <Header 
         activeSection={activeSection} 
         scrollToSection={scrollToSection} 
         theme={theme} 
-        toggleTheme={toggleTheme} 
+        toggleTheme={toggleTheme}
+        toast={toast} 
       />
       
       <main>

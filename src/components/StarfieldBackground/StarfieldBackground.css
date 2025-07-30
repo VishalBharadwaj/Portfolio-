@@ -1,0 +1,9 @@
+#starfield-background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -2; /* Ensure it's behind everything */
+    background-color: #0f172a; /* Deep space color */
+}

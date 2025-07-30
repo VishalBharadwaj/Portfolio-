@@ -35,10 +35,10 @@ const Footer = ({ scrollToSection }) => {
             <div className="footer-section">
               <h4>Connect</h4>
               <div className="social-icons">
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn"><LinkedInIcon /></a>
-                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub"><GitHubIcon /></a>
-                <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="Twitter"><TwitterIcon /></a>
-                <a href="mailto:your.email@example.com" aria-label="Email"><MailIcon /></a>
+                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" className="hoverable"><LinkedInIcon /></a>
+                <a href="https://github.com/yourusername" target="_blank" rel="noopener noreferrer" aria-label="GitHub" className="hoverable"><GitHubIcon /></a>
+                <a href="https://twitter.com/yourhandle" target="_blank" rel="noopener noreferrer" aria-label="Twitter" className="hoverable"><TwitterIcon /></a>
+                <a href="mailto:your.email@example.com" aria-label="Email" className="hoverable"><MailIcon /></a>
               </div>
             </div>
           </div>

@@ -3,28 +3,7 @@
 
 /* CSS Variables */
 :root {
-  /* Light Theme */
-  --primary-color: #0070f3;
-  --primary-color-rgb: 0, 112, 243;
-  --secondary-color: #6d28d9;
-  --secondary-color-rgb: 109, 40, 217;
-  --accent-color: #f59e0b;
-  --accent-color-rgb: 245, 158, 11;
-  --text-dark: #111827;
-  --text-light: #6b7280;
-  --text-muted: #9ca3af;
-  --background-light: #f9fafb;
-  --background-white: #ffffff;
-  --background-card: #ffffff;
-  --border-color: #e5e7eb;
-  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
-  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
-  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
-  --gradient-primary: linear-gradient(135deg, #0070f3, #6d28d9);
-}
-
-/* Dark Theme */
-[data-theme='dark'] {
+  /* Dark Theme (Default) */
   --primary-color: #3b82f6;
   --primary-color-rgb: 59, 130, 246;
   --secondary-color: #8b5cf6;
@@ -42,6 +21,29 @@
   --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.3);
   --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.3);
   --gradient-primary: linear-gradient(135deg, #3b82f6, #8b5cf6);
+  --gradient-background: linear-gradient(135deg, #00001a, #0c0c2b);
+}
+
+/* Light Theme */
+[data-theme='light'] {
+  --primary-color: #0070f3;
+  --primary-color-rgb: 0, 112, 243;
+  --secondary-color: #6d28d9;
+  --secondary-color-rgb: 109, 40, 217;
+  --accent-color: #f59e0b;
+  --accent-color-rgb: 245, 158, 11;
+  --text-dark: #111827;
+  --text-light: #6b7280;
+  --text-muted: #9ca3af;
+  --background-light: #f9fafb;
+  --background-white: #ffffff;
+  --background-card: #ffffff;
+  --border-color: #e5e7eb;
+  --shadow-sm: 0 1px 2px 0 rgb(0 0 0 / 0.05);
+  --shadow-md: 0 4px 6px -1px rgb(0 0 0 / 0.1);
+  --shadow-lg: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  --gradient-primary: linear-gradient(135deg, #0070f3, #6d28d9);
+  --gradient-background: #f9fafb;
 }
 
 /* Global Reset */
@@ -60,8 +62,16 @@ body {
   font-family: 'Poppins', sans-serif;
   line-height: 1.6;
   color: var(--text-dark);
-  background-color: var(--background-white);
-  transition: background-color 0.3s ease, color 0.3s ease;
+  background: var(--gradient-background);
+  transition: background 0.3s ease, color 0.3s ease;
+  cursor: none;
+}
+
+/* Ensure all clickable elements also hide the cursor */
+a,
+button,
+.hoverable {
+  cursor: none;
 }
 
 .container {
