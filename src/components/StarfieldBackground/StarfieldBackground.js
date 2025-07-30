@@ -14,7 +14,7 @@ const StarfieldBackground = () => {
         canvas.height = height;
 
         let stars = [];
-        const numStars = 400;
+        const numStars = 200;
         const mouse = { x: null, y: null, radius: 100 };
 
         // --- Event Listeners ---

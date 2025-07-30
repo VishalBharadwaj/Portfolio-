@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useMemo } from 'react';
 import './App.css';
 
 // Import components
@@ -7,6 +7,7 @@ import Hero from './components/Hero/Hero';
 import About from './components/About/About';
 import Extracurriculars from './components/Extracurriculars/Extracurriculars';
 import Certificates from './components/Certificates/Certificates';
+import Hackathons from './components/Hackathons/Hackathons';
 import Projects from './components/Projects/Projects';
 import Contact from './components/Contact/Contact';
 import Footer from './components/Footer/Footer';
@@ -25,14 +26,15 @@ function App() {
   const [toast, setToast] = useState({ show: false, message: '', key: 0 });
   
   // --- LOGIC FROM YOUR NEW CODE ---
-  const sectionRefs = {
-    hero: useRef(null),
-    about: useRef(null),
-    extracurriculars: useRef(null),
-    certificates: useRef(null),
-    projects: useRef(null),
-    contact: useRef(null)
-  };
+  const sectionRefs = useMemo(() => ({
+    hero: React.createRef(),
+    about: React.createRef(),
+    extracurriculars: React.createRef(),
+    certificates: React.createRef(),
+    hackathons: React.createRef(),
+    projects: React.createRef(),
+    contact: React.createRef(),
+  }), []);
 
   // --- LOGIC FROM MY SUGGESTION (INTEGRATED) ---
   const [scrollProgress, setScrollProgress] = useState(0);
@@ -158,8 +160,9 @@ function App() {
           <div id="hero" ref={sectionRefs.hero}><Hero scrollToSection={scrollToSection} isActive={activeSection === 'hero'} /></div>
           <section id="about" ref={sectionRefs.about}><About isActive={activeSection === 'about'} /></section>
           <section id="certificates" ref={sectionRefs.certificates}><Certificates isActive={activeSection === 'certificates'} /></section>
-          <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
+          <section id="hackathons" ref={sectionRefs.hackathons}><Hackathons isActive={activeSection === 'hackathons'} /></section>
           <section id="extracurriculars" ref={sectionRefs.extracurriculars}><Extracurriculars isActive={activeSection === 'extracurriculars'} /></section>
+          <section id="projects" ref={sectionRefs.projects}><Projects isActive={activeSection === 'projects'} /></section>
           <section id="contact" ref={sectionRefs.contact}><Contact isActive={activeSection === 'contact'} /></section>
         </main>
         

@@ -1,0 +1,132 @@
+/* === Hackathons Section === */
+.hackathons-section {
+    padding: 6rem 0;
+    background-color: var(--background-color-light);
+    opacity: 0;
+    transform: translateY(50px);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+.hackathons-section.is-visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+.hackathon-header {
+    text-align: center;
+    margin-bottom: 4rem;
+}
+
+.hackathon-header h1 {
+    font-size: 3rem;
+    font-weight: 700;
+    color: var(--primary-text-color);
+}
+
+.hackathon-awards {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--accent-color);
+    margin-top: 0.5rem;
+}
+
+.hackathon-content {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 4rem;
+    align-items: flex-start;
+}
+
+.hackathon-text h2 {
+    font-size: 2rem;
+    font-weight: 600;
+    color: var(--primary-text-color);
+    margin-bottom: 1rem;
+}
+
+.hackathon-text h3 {
+    font-size: 1.2rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 1.5rem;
+}
+
+.hackathon-text p {
+    font-size: 1rem;
+    line-height: 1.7;
+    color: var(--secondary-text-color);
+    margin-bottom: 2rem;
+}
+
+.team-showcase {
+    background-color: var(--card-background-color);
+    padding: 1.5rem;
+    border-radius: 8px;
+    border-left: 4px solid var(--accent-color);
+}
+
+.team-showcase h4 {
+    font-size: 1.3rem;
+    margin-bottom: 1rem;
+    color: var(--primary-text-color);
+}
+
+.team-showcase ul {
+    list-style: none;
+    padding: 0;
+}
+
+.team-showcase li {
+    font-size: 1rem;
+    color: var(--secondary-text-color);
+    margin-bottom: 0.5rem;
+}
+
+.hackathon-gallery {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+}
+
+.gallery-image {
+    overflow: hidden;
+    border-radius: 8px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+}
+
+.gallery-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease, filter 0.4s ease;
+}
+
+.gallery-image:hover img {
+    transform: scale(1.08);
+    filter: brightness(1.1);
+}
+
+/* === Responsive Design === */
+@media (max-width: 992px) {
+    .hackathon-content {
+        grid-template-columns: 1fr;
+    }
+
+    .hackathon-gallery {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
+
+@media (max-width: 768px) {
+    .hackathon-header h1 {
+        font-size: 2.5rem;
+    }
+
+    .hackathon-awards {
+        font-size: 1.2rem;
+    }
+
+    .hackathon-gallery {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}

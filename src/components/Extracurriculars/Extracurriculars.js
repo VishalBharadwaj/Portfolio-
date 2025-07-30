@@ -1,51 +1,70 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 import './Extracurriculars.css';
 
-const Extracurriculars = ({ isActive }) => {
-  const extracurriculars = [
-    {
-      title: 'Master of Ceremonies',
-      icon: '🎤',
-      description: 'Hosting and engaging audiences at various events.',
-      details: {
-        type: 'gallery',
-        items: [
-          // Add your image data here, for example:
-          // { src: '/path/to/image1.jpg', caption: 'Hosting at XYZ event' },
-          // { src: '/path/to/image2.jpg', caption: 'MC at ABC conference' },
-        ],
-      },
-    },
+const performances = [
+  {
+    event: 'Samskruthi 2k23',
+    headline: 'Opened for Benny Dayal',
+    audience: '8,000+ People',
+    image: '/Master of Ceremonies/samksruthi2k23.jpg',
+  },
+  {
+    event: 'Samskruthi 2k24',
+    headline: 'Opened for Jonita Gandhi',
+    audience: '10,000+ People',
+    image: '/Master of Ceremonies/samskruthi2k24.png',
+  },
+  {
+    event: 'Samskruthi 2k25',
+    headline: 'Opened for Sonu Nigam',
+    audience: '15,000+ People',
+    image: '/Master of Ceremonies/samskruthi2k25.JPG',
+  },
+];
 
-    {
-      title: 'Hackathons',
-      icon: '💻',
-      description: 'Innovative projects and solutions developed during hackathons.',
-      details: {
-        type: 'list',
-        items: [
-          // Add your hackathon data here, for example:
-          // { name: 'Hack a Web', project: 'Portfolio-', position: '1st Place' },
-          // { name: 'Innovate for India', project: 'Agri-Tech Solution', role: 'Team Lead' },
-        ],
+const Extracurriculars = ({ isActive }) => {
+  const sectionRef = useRef(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('is-visible');
+          }
+        });
       },
-    },
-  ];
+      { threshold: 0.1 }
+    );
+
+    const elements = sectionRef.current.querySelectorAll('.performance-card');
+    elements.forEach((el) => observer.observe(el));
+
+    return () => {
+      if (elements) {
+        elements.forEach((el) => observer.unobserve(el));
+      }
+    };
+  }, []);
 
   return (
-    <section id="extracurriculars" className={`extracurriculars-section ${isActive ? 'active' : ''}`}>
+    <section id="extracurriculars" className={`extracurriculars-section ${isActive ? 'active' : ''}`} ref={sectionRef}>
       <div className="container">
         <div className="section-header">
-          <h2>Extracurriculars</h2>
-          <p className="section-subtitle">My passions and achievements beyond the code</p>
+          <h2>Performance Highlights</h2>
+          <p className="section-subtitle">Key moments on stage as a Master of Ceremonies</p>
         </div>
-        <div className="extracurriculars-grid">
-          {extracurriculars.map((activity, index) => (
-            <div key={index} className="extracurricular-card">
-              <div className="extracurricular-icon">{activity.icon}</div>
-              <h3>{activity.title}</h3>
-              <p>{activity.description}</p>
-              {/* We can add more detailed views here later */}
+        <div className="performance-list">
+          {performances.map((perf, index) => (
+            <div key={index} className={`performance-card ${index % 2 !== 0 ? 'layout-reversed' : ''}`}>
+              <div className="performance-image">
+                <img src={process.env.PUBLIC_URL + perf.image} alt={perf.headline} />
+              </div>
+              <div className="performance-details">
+                <span className="event-tag">{perf.event}</span>
+                <h3>{perf.headline}</h3>
+                <p>{perf.audience}</p>
+              </div>
             </div>
           ))}
         </div>

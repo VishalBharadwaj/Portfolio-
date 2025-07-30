@@ -84,7 +84,7 @@ const Hero = ({ scrollToSection, isActive }) => {
             </div>
             <pre className="code-body">
               <code>
-                <span className="code-comment">// developer.js</span><br/>
+                <span className="code-comment">{'// developer.js'}</span><br/>
                 <span className="code-keyword">const</span> developer = {'{'}<br/>
                 {'  '}<span className="code-property">name</span>: <span className="code-string">"Vishal Bharadwaj"</span>,<br/>
                 {'  '}<span className="code-property">title</span>: <span className="code-string">"Aspiring Full Stack Developer"</span>,<br/>

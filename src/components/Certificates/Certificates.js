@@ -1,49 +1,70 @@
-import React from 'react';
+import React, { useState } from 'react';
+import Modal from '../Modal/Modal';
 import './Certificates.css';
 
 const Certificates = ({ isActive }) => {
-  const certificates = [
-    {
-      title: 'Professional Certificates',
-      icon: '📜',
-      description: 'A collection of my professional and academic certifications.',
-      items: [
-        // Add your certificate data here, for example:
-        // { name: 'React Nanodegree', issuer: 'Udacity' },
-        // { name: 'AWS Certified Developer', issuer: 'Amazon Web Services' },
-      ],
-    },
-    {
-      title: 'Chess Achievements',
-      icon: '♟️',
-      description: 'My journey and accomplishments in the world of chess.',
-      items: [
-        // Add your chess certificate data here, for example:
-        // { name: 'State Level Champion', year: '2022' },
-        // { name: 'Rated Player', rating: '1800' },
-      ],
-    },
+  const [isModalOpen, setModalOpen] = useState(false);
+  const [selectedCert, setSelectedCert] = useState(null);
+
+  const certificateImages = [
+    'AWS.png',
+    'Cisco_IOT.png',
+    'Cisco_NetworkingBasics.png',
+    'Google Assets Threats and Vulnerabilities-1.png',
+    'Google Automate Cybersecurity Tasks with Python-1.png',
+    'Google Connect and Protect Networks and Network-1.png',
+    'Google Foundations of CyberSecurity-1.png',
+    'Google Play it Safe Manage Security Risks-1.png',
+    'Google Put it to Work Prepare for Cybersecurity Jobs-1.png',
+    'Google Sound the Alarm Detection and Response-1.png',
+    'Google Tools of Trade Linux and SQL-1.png',
+    'Google_AI.png',
+    'Google_Cybersecurity.png',
+    'Google_DigitalMarketing .png',
+    'Infosys_DBMS.png',
+    'Infosys_DSA.png',
+    'Infosys_SM.png',
+    'Infosys_VLSI.png',
+    'Introduction_to_Data_Science_Badge20230709-28-dwi4ru-1.png',
+    'Microsoft Excel 2019 Essentials-1.png',
+    'Microsoft Word 2019 Essentials-1.png',
+    'Microsoft Word 2019 Pro-1.png',
+    'PluralSight_ML.png',
+    'Python-The Big Picture-1.png'
   ];
 
+  // Duplicate the array for a seamless loop
+  const extendedCertificates = [...certificateImages, ...certificateImages];
+
+  const handleCertificateClick = (image) => {
+    setSelectedCert(`/Course Certificates/${image}`);
+    setModalOpen(true);
+  };
+
   return (
-    <section id="certificates" className={`certificates-section ${isActive ? 'active' : ''}`}>
-      <div className="container">
-        <div className="section-header">
-          <h2>Certificates</h2>
-          <p className="section-subtitle">My credentials and achievements</p>
+    <>
+      <section id="certificates" className={`certificates-section ${isActive ? 'active' : ''}`}>
+        <div className="container">
+          <div className="section-header">
+            <h2>Course Certifications</h2>
+            <p className="section-subtitle">A showcase of my certifications from various online courses</p>
+          </div>
         </div>
-        <div className="certificates-grid">
-          {certificates.map((category, index) => (
-            <div key={index} className="certificate-card">
-              <div className="certificate-icon">{category.icon}</div>
-              <h3>{category.title}</h3>
-              <p>{category.description}</p>
-              {/* We can list the items here later */}
-            </div>
-          ))}
+        <div className="scrolling-gallery-container">
+          <div className="scrolling-gallery">
+            {extendedCertificates.map((cert, index) => (
+              <div className="gallery-item" key={index} onClick={() => handleCertificateClick(cert)}>
+                <img src={`/Course Certificates/${cert}`} alt={`Certificate ${index + 1}`} />
+              </div>
+            ))}
+          </div>
         </div>
-      </div>
-    </section>
+      </section>
+
+      <Modal isOpen={isModalOpen} onClose={() => setModalOpen(false)}>
+        {selectedCert && <img src={selectedCert} alt="Selected Certificate" className="modal-certificate-image" />}
+      </Modal>
+    </>
   );
 };
 

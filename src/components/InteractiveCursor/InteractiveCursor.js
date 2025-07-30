@@ -4,7 +4,7 @@ import './InteractiveCursor.css';
 const InteractiveCursor = () => {
   const [position, setPosition] = useState({ x: 0, y: 0 });
   const [followerPosition, setFollowerPosition] = useState({ x: 0, y: 0 });
-  const [isHovering, setIsHovering] = useState(false);
+  const [, setIsHovering] = useState(false);
   const [coverProps, setCoverProps] = useState({ width: 40, height: 40, borderRadius: '50%' });
 
   const follower = useRef({ x: 0, y: 0, vx: 0, vy: 0 }).current;

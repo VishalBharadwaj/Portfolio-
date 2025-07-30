@@ -1,6 +1,5 @@
 .certificates-section {
   padding: 100px 0;
-
   opacity: 0;
   transform: translateY(30px);
   transition: all 0.6s ease;
@@ -11,63 +10,81 @@
   transform: translateY(0);
 }
 
-.certificates-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-  gap: 32px;
+.scrolling-gallery-container {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  padding: 20px 0;
+  -webkit-mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
+  mask-image: linear-gradient(to right, transparent, black 15%, black 85%, transparent);
 }
 
-.certificate-card {
-  background-color: var(--background-light);
-  padding: 40px 32px;
+.scrolling-gallery {
+  display: flex;
+  align-items: center;
+  gap: 40px;
+  width: fit-content;
+  animation: scroll 80s linear infinite;
+}
+
+.scrolling-gallery-container:hover .scrolling-gallery {
+  animation-play-state: paused;
+}
+
+@keyframes scroll {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(-50%);
+  }
+}
+
+.gallery-item {
+  flex-shrink: 0;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.gallery-item img {
+  display: block;
+  height: 220px;
+  width: auto;
   border-radius: 12px;
-  text-align: center;
-  box-shadow: var(--shadow-sm);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1), 0 5px 10px rgba(0, 0, 0, 0.05);
   transition: all 0.3s ease;
-  border: 1px solid var(--border-color);
 }
 
-.certificate-card:hover {
-  transform: translateY(-8px);
-  box-shadow: var(--shadow-lg);
+.gallery-item:hover {
+  transform: scale(1.05) !important; /* Use important to override nth-child transforms */
+  z-index: 10;
 }
 
-.certificate-icon {
-  font-size: 3rem;
-  margin-bottom: 24px;
+/* Dynamic collage effect */
+.gallery-item:nth-child(3n) {
+  transform: translateY(-15px) rotate(-2.5deg);
+}
+.gallery-item:nth-child(4n) {
+  transform: translateY(10px) rotate(1.5deg);
+}
+.gallery-item:nth-child(5n) {
+  transform: translateY(-5px) rotate(3deg);
 }
 
-.certificate-card h3 {
-  margin-bottom: 16px;
-  color: var(--text-dark);
+.modal-certificate-image {
+  display: block;
+  max-width: 90%;
+  max-height: 85vh;
+  margin: auto;
+  border-radius: 8px;
 }
 
-.certificate-card p {
-  color: var(--text-light);
-  line-height: 1.6;
-}
-
-/* --- Responsive Styles for Certificates Section --- */
-
-/* Tablet Styles */
 @media (max-width: 768px) {
-  .certificates-section {
-    padding: 80px 0;
+  .gallery-item img {
+    height: 160px;
   }
-  .certificates-grid {
-    gap: 24px;
-  }
-}
-
-/* Mobile Styles */
-@media (max-width: 480px) {
-  .certificates-section {
-    padding: 60px 0;
-  }
-  .certificate-card {
-    padding: 32px 24px;
-  }
-  .certificate-icon {
-    font-size: 2.5rem;
+  .scrolling-gallery {
+    animation-duration: 60s;
+    gap: 30px;
   }
 }
